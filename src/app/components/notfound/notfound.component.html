@@ -1,0 +1,17 @@
+<mat-card class="basic">
+<div class="mat-display-4" fxLayoutAlign="center center">404</div>
+
+<div class="mat-headline" fxLayoutAlign="center center">Page not found</div>
+
+<div fxLayoutAlign="center center"><button  mat-raised-button [routerLink]="['/']" fxLayoutAlign="center center" color="primary">
+    Back to Home
+</button></div>
+</mat-card>
+
+
+
+<br>
+
+<!-- You are logged in as: {{ authService.currentUser.sub }} -->
+
+You are logged in as: {{ authService.currentUser.ROLE_ADMIN }}

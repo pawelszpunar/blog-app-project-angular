@@ -1,0 +1,26 @@
+.post-view:hover {
+    filter: brightness(90%);
+}
+
+.mat-display-1 {
+    margin: 0 0 30px;
+}
+
+pre {
+    font-size: inherit;
+    color: inherit;
+    border: initial;
+    padding: initial;
+    font-family: inherit;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.mat-subheading-2 {
+    align-items:center;
+    justify-content:center;
+    margin: 0px;
+    min-height: 140px;
+}

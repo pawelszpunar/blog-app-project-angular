@@ -1,0 +1,78 @@
+
+
+<div>
+    <mat-toolbar color="primary" class="bgimg">
+      <!-- <div fxShow="true" fxHide.gt-sm="true">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div> -->
+      <span>
+
+          <img class="img-fluid" src="/assets/my-blog-logo.png" style="height: 65px; float: left; display: block" layout-align="left center" [routerLink]="['/']">
+          </span>
+  
+      <!-- <span>BLOG APP</span> -->
+      <span class="example-spacer"></span>
+      <!-- <div fxShow="true" fxHide.lt-md="true"> --><div>
+
+
+
+        <mat-toolbar color="primary" class="flexSpaceBetween">        
+          <span>
+
+            
+
+
+
+            <button mat-button [routerLink]="['/']">
+                <mat-icon>home</mat-icon>
+                Home
+            </button>
+            <span class="example-spacer"></span>
+            <button mat-button [routerLink]="['/blog']"><mat-icon>assessment</mat-icon> Blog</button>
+            <!-- <span class="example-spacer"></span> -->
+            <button mat-button [routerLink]="['/register']"><mat-icon>app_registration</mat-icon> Register</button>
+     
+            <span class="example-spacer"></span>
+            <button mat-button [routerLink]="['/login']" *ngIf="!authService.isLoggedIn()"><mat-icon>login</mat-icon> Login</button>
+
+            <button mat-button (click)="logout()" *ngIf="authService.isLoggedIn()"><mat-icon>logout</mat-icon> Logout</button>
+            <!-- <span class="example-spacer"></span> -->
+            <button mat-button [routerLink]="['/about']"><mat-icon>info</mat-icon> About</button>
+
+            <button mat-button [routerLink]="['/admin']" 
+                *ngIf="authService.isLoggedIn() && authService.loggedInWithRole('ROLE_ADMIN')">
+                <mat-icon>admin_panel_settings</mat-icon> Admin
+            </button>
+            
+        </span>
+        </mat-toolbar>
+
+
+      </div>
+  
+    </mat-toolbar>
+    
+    
+      <!-- <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+        <div fxLayout="column">
+          <a mat-button routerLink="/">Home</a>
+          <a mat-button routerLink="/register">Register</a>
+          <a mat-button routerLink="/login">Login</a>
+          <a mat-button (click)="logout()">Logout</a>
+          <a mat-button routerLink="/about">About</a>
+        </div>
+      </mat-sidenav> -->
+
+</div>
+<!-- <mat-sidenav-content fxFlexFill class="main-content"> -->
+    <!-- </mat-sidenav-content> -->
+      
+
+      <!-- <mat-sidenav-container fxFlexFill class="example-container"><mat-sidenav-content fxFlexFill class="main-content">
+            <router-outlet></router-outlet>
+       -->
+
+    <!-- </mat-sidenav-container> -->
+

@@ -1,1 +1,126 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// .title-center {
+//     flex: 1 1 auto;
+//     text-align: center;
+//   }
+
+@import '~@angular/material/theming';
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+
+// Fonts
+@import 'https://fonts.googleapis.com/css?family=Material+Icons';
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+     
+
+body {
+  margin: 0;
+}
+
+div.basic {
+  -webkit-box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.6);
+  box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.6);
+}
+
+.post-img {
+  float:left;
+  Margin:5px 20px 20px 10px;
+  background:#E79851;
+  height: 180px;
+  width: 180px;
+}
+
+// CSS GRID BEGIN
+.container {
+  display: grid;
+  grid-template-columns: auto 900px auto;
+  grid-template-rows: auto 1fr auto;
+  grid-gap: 0px;
+  grid-template-areas:
+  "header header header"
+  "nav content side"
+  "footer footer footer";
+  height: 100vh;
+}
+
+app-menu,
+app-column-left,
+[main],
+app-column-right,
+app-footer {
+  background-color: #ffffff;
+}
+
+app-menu {
+  color: white;
+  font-size: 14px;
+  grid-area: header;
+
+  //background-color: #FA7D44;
+}
+
+app-column-left {
+  grid-area: nav;
+  margin-left: 0rem;
+  //background-color: #2A92BF;
+}
+
+[main] {
+  grid-area: content;
+  //background-color: #F4CE46;
+  padding: 20px;
+}
+
+app-column-right {
+  grid-area: side;
+  margin-right: 0rem;
+  //background-color: #2A92BF;
+}
+
+app-footer {
+  grid-area: footer;
+  //background-color:#2BB961;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 25px 0;
+}
+
+ul li {
+  color: white;
+}
+ul li a {
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 991px) {
+  app-column-left, app-column-right {
+grid-area: content;
+position: relative;
+left: 0;
+}
+
+app-column-left, app-column-right {
+left: -100%
+}
+  .container {
+    grid-template-columns: 1fr;
+    
+    grid-template-areas:
+      "header header header"
+      "content content content"
+      "footer footer footer";
+    grid-template-rows:auto 1fr auto;
+  }
+}
+// CSS GRID END
+

@@ -1,0 +1,28 @@
+<div style="display: flex; justify-content: space-between">
+    <div>
+
+<button mat-raised-button [routerLink]="['/']" color="primary">Main page</button>
+</div>
+
+<div>
+<mat-paginator
+    [length]="totalItems"
+    [pageSize]="itemsPerPage"
+    (page)="getPage(page = $event.pageIndex + 1, totalItems = $event.pageSize)"
+    [pageSizeOptions]="[1, 2, 4, 5, 10, 15]"
+    aria-label="Select page"
+    class="my-paginator"
+    showFirstLastButtons>
+</mat-paginator>
+</div>
+</div>
+<div fxLayout="column" fxLayoutGap="15px">
+    <app-post-template
+        *ngFor="let post of postsOnly | paginate: { itemsPerPage: itemsPerPage , currentPage: page, totalItems: totalItems }"
+        [uuid]="post.uuid"
+        [title]="post.title"
+        [content]="post.content  | cutString"
+        [created]="post.created"
+        [numberOfComments]="post.numberOfComments">
+    </app-post-template>
+</div>

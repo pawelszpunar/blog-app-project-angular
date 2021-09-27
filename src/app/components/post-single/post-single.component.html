@@ -1,0 +1,39 @@
+<button mat-raised-button backButton color="primary">Back to the previous page</button>
+
+<p></p>
+
+<div>
+    <mat-card class="singlepost">
+        <mat-card-content>
+            <p class="mat-title">{{ posts.title }}</p>
+            <p style="white-space: pre-line;">{{ posts.content }}</p></mat-card-content>
+        <p class="post-meta">Posted by
+            <a href="#!">{{ posts.author }}</a>
+            on {{ posts.created }}</p>
+      </mat-card>
+      <mat-divider></mat-divider>    
+</div>
+
+<div>
+
+    <mat-card><p class="mat-title">Comments ({{ posts.numberOfComments }}): </p></mat-card>
+    <ng-container *ngIf="posts.numberOfComments == 0">
+        <mat-card>There's currently no comments for this post.</mat-card></ng-container>
+    <app-comments-template
+    *ngFor="let comments of comments.content"
+    [content]="comments.content"
+    [created]="comments.created"
+    [author]="comments.author"></app-comments-template>
+
+    <!-- <mat-card>
+        <mat-card-content>
+            
+            <p style="white-space: pre-line;">BBBB CCCC</p></mat-card-content>
+        <p class="post-meta">Posted by
+            <a href="#!">{{ posts.author }}</a>
+            on {{ posts.created }} | Comments ({{ posts.numberOfComments }})</p>
+      </mat-card>
+      <mat-divider></mat-divider>     -->
+</div>
+
+

@@ -1,0 +1,60 @@
+<div class="basic">
+<mat-card class="post-view">
+    <mat-card-content class="post-list">        
+        <p class="mat-display-1">{{ title }}</p>    
+        <p style="white-space: pre-line;" class="mat-subheading-2">
+            
+            <img src="http://i.imgur.com/6bkt2Qk.gif" class="post-img"/>
+            
+            {{ content }}</p>
+    </mat-card-content>
+    <div style="display: flex; justify-content: space-between">
+        <div>
+    <p class="post-meta">Posted by
+        <b>{{ author }}</b>
+        on {{ created }} | Comments ({{ numberOfComments }})</p>
+        </div>
+        <div>
+            <button 
+                mat-raised-button 
+                [routerLink]="['/post', uuid]" 
+                color="primary" 
+                fxLayoutAlign="center center">Read more</button>
+        </div>
+    </div>
+
+
+</mat-card>
+
+</div>
+
+
+
+
+
+<!-- <div class="basic">
+    <mat-card class="post-view">
+        <mat-card-content class="post-list">        
+            <p class="mat-display-1">{{ title }}</p>    
+            <p style="white-space: pre-line;" class="mat-subheading-2">{{ content }}</p>
+        </mat-card-content>
+        <div style="display: flex; justify-content: space-between">
+            <div>
+        <p class="post-meta">Posted by
+            <a href="#!">{{ author }}</a>
+            on {{ created }} | Comments ({{ numberOfComments }})</p>
+            </div>
+            <div>
+                <button 
+                    mat-raised-button 
+                    [routerLink]="['/post', uuid]" 
+                    color="primary" 
+                    fxLayoutAlign="center center">Read more</button>
+            </div>
+        </div>
+    
+    
+    </mat-card>
+    
+    </div> -->
+    

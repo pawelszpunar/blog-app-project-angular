@@ -1,0 +1,7 @@
+--* {{ uuid }}*--
+
+<app-comments-template
+*ngFor="let comm of comments.content"
+[content]="comm.content"
+[created]="comm.created"
+[author]="comm.author"></app-comments-template>

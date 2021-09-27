@@ -1,0 +1,112 @@
+<mat-card class="my-box">
+    <mat-card-header fxLayoutAlign="center center">
+      <mat-card-title>Add new post</mat-card-title>
+    </mat-card-header>
+      <form autocomplete="off" [formGroup]="addpostForm" (submit)="addPost()" #addForm="ngForm">
+        <mat-card-content>
+  
+          <mat-form-field class="form-field">
+            <mat-label> Title
+            </mat-label>
+            <input matInput formControlName="title" id="title" class="form-control" required>
+            <mat-error *ngIf="getControl.title.touched && getControl.title.invalid">
+              <span *ngIf="getControl.title.errors?.required">This field is mandatory.</span>
+              <span *ngIf="getControl.title.errors?.minlength">Minimum {{ minTitle }} characters are required.</span>
+              <span *ngIf="getControl.title.errors?.maxlength">Maximum {{ maxTitle }} characters are allowed.</span>
+            </mat-error>          
+          </mat-form-field>
+  
+          <mat-form-field class="form-field">
+            <mat-label> Content
+            </mat-label>
+            <textarea matInput formControlName="content" id="content" class="form-control" required
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="10"></textarea>
+            <mat-error *ngIf="getControl.content.touched && getControl.content.invalid">
+              <span *ngIf="getControl.content.errors?.required">This field is mandatory.</span>
+              <span *ngIf="getControl.content.errors?.minlength">Minimum {{ minContent }} characters are required.</span>
+              <span *ngIf="getControl.content.errors?.maxlength">Maximum {{ maxContent }} characters are allowed.</span>
+            </mat-error>
+          </mat-form-field>
+  
+        </mat-card-content>
+        
+        <button mat-raised-button color="primary" type="submit" [disabled]="!addForm.form.valid">Add post</button>
+  
+      </form>
+    </mat-card>
+
+<p style="text-align: center">Post preview:</p>
+
+   <div fxLayout="column" fxLayoutGap="15px">
+      <app-post-template
+              [title]="getControl.title.value"
+              [content]="getControl.content.value"
+              >
+      </app-post-template>
+      </div>
+  
+
+      <!-- [created]=""
+      [author]=""
+      [numberOfComments]="" -->
+
+
+
+<!-- <form #myForm="ngForm" (ngSubmit)="createPost(myForm.value)">
+                
+    <label>Title: </label>
+    <br>
+    <input name="title" id="title" class="form-control" ngModel #title=ngModel>
+    <br>
+    <label>Content: </label>
+    <br>
+    <textarea name="content" id="content" class="form-control" ngModel #content=ngModel></textarea>
+    <button class="btn btn-primary" type="submit">Add Post</button>
+    
+</form> -->
+
+
+
+
+<!-- <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+            <h2>Add new post</h2>
+
+            <form #myForm="ngForm" (ngSubmit)="createPost(myForm.value)">
+                <div class="form-group">
+                    <label for="title">Post title</label> 
+                    <input id="title" name="title" type="text" required="required" class="form-control" ngModel #title=ngModel>
+                </div>
+                <div class="form-group">
+                    <label for="content">Content</label> 
+                    <textarea id="content" name="content" cols="40" rows="8" required="required" class="form-control" ngModel #content=ngModel></textarea>
+                </div> 
+                <div class="form-group">
+                    <button name="submit" type="submit" class="btn btn-primary">Add post</button>
+                </div>
+            </form>
+
+
+
+            
+        </div>
+    </div>
+</div> -->
+
+
+<!-- <form #myForm="ngForm" (ngSubmit)="createPost(myForm.value)">
+                
+                <label>Title: </label>
+                <input name="title" id="title" class="form-control" ngModel #title=ngModel>
+                <label>Content: </label>
+                <textarea name="content" id="content" class="form-control" ngModel #content=ngModel></textarea>
+                <button class="btn btn-primary" type="submit">Add Post</button>
+                
+            </form> -->

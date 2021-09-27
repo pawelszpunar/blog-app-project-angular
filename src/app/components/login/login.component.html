@@ -1,0 +1,115 @@
+
+<mat-card class="my-box">
+  <mat-card-header fxLayoutAlign="center center">
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+    <form autocomplete="off" [formGroup]="loginForm" (submit)="onSubmit()" #myLoginForm="ngForm">
+      <mat-card-content>
+
+        <mat-form-field class="form-field">
+          <mat-label> Username
+          </mat-label>
+          <input matInput formControlName="username" id="username" class="form-control" required>
+          <mat-error *ngIf="getControl.username.touched && getControl.username.invalid">
+            <span *ngIf="getControl.username.errors?.required">This field is mandatory.</span>
+            <span *ngIf="getControl.username.errors?.minlength">Minimum {{ minUsername }} characters are required.</span>
+            <span *ngIf="getControl.username.errors?.maxlength">Maximum {{ maxUsername }} characters are allowed.</span>
+          </mat-error>          
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+          <mat-label> Password
+          </mat-label>
+          <input matInput formControlName="password" id="password" class="form-control" type="password" required>
+          <mat-error *ngIf="getControl.password.touched && getControl.password.invalid">
+            <span *ngIf="getControl.password.errors?.required">This field is mandatory.</span>
+            <span *ngIf="getControl.password.errors?.minlength">Minimum {{ minPassword }} characters are required.</span>
+            <span *ngIf="getControl.password.errors?.maxlength">Maximum {{ maxPassword }} characters are allowed.</span>
+          </mat-error>
+        </mat-form-field>
+
+      </mat-card-content>
+      
+      <button mat-raised-button color="primary" type="submit" [disabled]="!myLoginForm.form.valid">Login</button>
+
+    </form>
+  </mat-card>
+
+
+
+
+
+
+
+
+
+
+<div></div>
+
+
+
+  <!-- <mat-card class="box">
+    <mat-card-header fxLayoutAlign="center center">
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <form autocomplete="off" class="example-form" (ngSubmit)="signIn()" #myForm="ngForm">
+      <input autocomplete="false" name="hidden" type="text" style="display:none;">
+        <mat-card-content>
+          <div>
+            <mat-form-field class="example-full-width">
+              <mat-card-subtitle>Username:</mat-card-subtitle>
+              <input matInput [(ngModel)]="username" name="username" required>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width">
+              <mat-card-subtitle>Password:</mat-card-subtitle>
+              <input matInput [(ngModel)]="password" type="password" name="password" required>
+            </mat-form-field>
+          </div>  
+        </mat-card-content>
+        <button mat-raised-button color="primary" class="btn-block" [disabled]="!myForm.form.valid">Login</button>
+    </form>
+  </mat-card> -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- </div> -->
+
+
+      <!-- <div class="basic">
+
+      <mat-card>
+        <mat-card-content>
+          <form [formGroup]="form" (ngSubmit)="signIn()">
+            <h2>Log In</h2>
+            <mat-error *ngIf="invalidLogin">
+              The username and password were not recognized
+            </mat-error>
+            <mat-form-field class="full-width-input">
+              <input matInput placeholder="Email" formControlName="username" required>
+              <mat-error>
+                Please provide a valid email address
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+              <input matInput type="password" placeholder="Password" formControlName="password" required>
+              <mat-error>
+                Please provide a valid password
+              </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary">Login</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      </div> -->
+

@@ -1,0 +1,62 @@
+<mat-card class="my-box">
+  <mat-card-header fxLayoutAlign="center center">
+    <mat-card-title>Register</mat-card-title>
+  </mat-card-header>
+    <form autocomplete="off" [formGroup]="registrationForm" (submit)="onSubmit()" #myForm="ngForm">
+      <mat-card-content>
+
+      <mat-form-field class="form-field">
+        <mat-label> Username
+        </mat-label>
+        <input matInput formControlName="username" id="username" class="form-control" required>
+        <mat-error *ngIf="getControl.username.touched && getControl.username.invalid">
+          <span *ngIf="getControl.username.errors?.required">This field is mandatory.</span>
+          <span *ngIf="getControl.username.errors?.minlength">Minimum {{ minUsername }} characters are required.</span>
+          <span *ngIf="getControl.username.errors?.maxlength">Maximum {{ maxUsername }} characters are allowed.</span>
+          <span *ngIf="getControl.username.errors?.usernameAlreadyTaken">Username already taken.</span>
+        </mat-error>
+        
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label> E-mail
+        </mat-label>
+        <input matInput formControlName="email" id="email" class="form-control" required>
+        <mat-error *ngIf="getControl.email.touched && getControl.email.invalid">
+          <span *ngIf="getControl.email.errors?.required">This field is mandatory.</span>
+          <span *ngIf="getControl.email.errors?.minlength">Minimum {{ minEmail }} characters are required.</span>
+          <span *ngIf="getControl.email.errors?.maxlength">Maximum {{ maxEmail }} characters are allowed.</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <mat-label> Password
+        </mat-label>
+        <input matInput formControlName="password" id="password" class="form-control" type="password" required>
+        <mat-error *ngIf="getControl.password.touched && getControl.password.invalid">
+          <span *ngIf="getControl.password.errors?.required">This field is mandatory.</span>
+          <span *ngIf="getControl.password.errors?.minlength">Minimum {{ minPassword }} characters are required.</span>
+          <span *ngIf="getControl.password.errors?.maxlength">Maximum {{ maxPassword }} characters are allowed.</span>
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field class="form-field">
+        <mat-label> Confirm password
+        </mat-label>
+        <input matInput formControlName="confirmPassword" id="confirmPassword" class="form-control" type="password" required>
+        <mat-error *ngIf="getControl.confirmPassword.touched && getControl.confirmPassword.invalid">
+          <span *ngIf="getControl.confirmPassword.errors?.required">This field is mandatory.</span>
+          <span *ngIf="getControl.confirmPassword.errors?.confirmedValidator">Password does not match.</span>
+        </mat-error>
+
+       
+        
+      </mat-form-field>
+
+    </mat-card-content>
+      
+      <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.form.valid">Register</button>
+
+    </form>
+  </mat-card>

@@ -1,0 +1,15 @@
+<p class="mat-display-1" layout-align="center center" style="text-align: center;">Latest posts:</p>
+
+<div fxLayout="column" fxLayoutGap="15px">
+<app-post-template
+        *ngFor="let post of posts.content"
+        [uuid]="post.uuid"
+        [title]="post.title"
+        [content]="post.content  | cutString"
+        [created]="post.created"
+        [author]="post.author"
+        [numberOfComments]="post.numberOfComments">
+</app-post-template>
+</div>
+<p></p>
+<button mat-raised-button [routerLink]="['/blog']" color="primary">Show more posts</button>
