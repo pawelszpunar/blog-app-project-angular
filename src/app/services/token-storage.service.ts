@@ -1,24 +1,26 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DialogService } from './dialog.service';
+import { JwtService } from './jwt.service';
 
-const TOKEN_KEY = 'auth-token';
-const USER_KEY = 'auth-user';
-
+const TOKEN_KEY = 'token';
+const REFRESH_TOKEN_KEY = 'refresh_token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenStorageService {
   result: string = '';
+  token: any;
+  tokenjson: any;
 
-  constructor(private dialog: DialogService, private router: Router) { }
+  constructor(
+    private dialog: DialogService, 
+    private router: Router,
+    private jwtService: JwtService) { }
 
   signOut(): void {
-
     if(window.localStorage.length != 0) {
-
       this.dialog
       .confirmDialog({
         title: 'Confirm Action',
@@ -32,93 +34,59 @@ export class TokenStorageService {
           window.localStorage.clear();
           console.log("localstorage cleared!");
           this.router.navigate(['/']);
-
         }
       });
-
-
-
     }
-      
+  }
 
+  forceSignOut() {
+    console.log("force " + window.localStorage.length)
+    if(window.localStorage.length != 0) {
+      window.localStorage.clear();
+    }
+  }
 
+  tokenToJsonObject() {
+    this.token = this.getToken();
+    if(this.token) {
+      this.tokenjson = JSON.parse(JSON.stringify(this.jwtService.decodeToken(this.token)));
+      return this.tokenjson;
+    } else {
+      return null;
+    }
+  }
 
+  getUsernameFromToken() {
+    return this.tokenToJsonObject().sub;
+  }
 
-    
+  getRolesFromToken() {
+    return this.tokenToJsonObject().roles;
+  }
 
-
-    // constructor(public dialog: MatDialog) { }
-    
-    // if(window.localStorage.length != 0) {
-    //   const message = `Are you sure you want to Logout?`;
-    //   const dialogData = new ConfirmDialogModel("Confirm Action", message);
-    //   const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-    //     maxWidth: "400px",
-    //     data: dialogData
-    //   });  
-    //   dialogRef.afterClosed().subscribe(dialogResult => {
-    //     this.result = dialogResult;
-    //   });
-    //   console.log('result: ' + this.result);   
-    // } 
-
-      
-      
-    
-
-    
+  public saveTokens(token: any): void {
+    window.localStorage.removeItem(TOKEN_KEY);
+    window.localStorage.removeItem(REFRESH_TOKEN_KEY);
+    window.localStorage.setItem(TOKEN_KEY, token.access_token);
+    window.localStorage.setItem(REFRESH_TOKEN_KEY, token.refresh_token);
   }
 
   public saveToken(token: any): void {
-    window.localStorage.removeItem(TOKEN_KEY);
-    window.localStorage.setItem('token', token.access_token);
-    window.localStorage.setItem('refresh_token', token.refresh_token);
+    window.localStorage.removeItem(TOKEN_KEY);    
+    window.localStorage.setItem(TOKEN_KEY, token.access_token);
+  }
+
+  public saveRefreshToken(token: any): void {
+    window.localStorage.removeItem(REFRESH_TOKEN_KEY);
+    window.localStorage.setItem(REFRESH_TOKEN_KEY, token.refresh_token);
   }
 
   public getToken(): string | null {
     return window.localStorage.getItem(TOKEN_KEY);
   }
 
-  public saveUser(user: any): void {
-    window.localStorage.removeItem(USER_KEY);
-    window.localStorage.setItem(USER_KEY, JSON.stringify(user));
-  }
-
-  public getUser(): any {
-    const user = window.localStorage.getItem(USER_KEY);
-    if (user) {
-      return JSON.parse(user);
-    }
-
-    return {};
+  public getRefreshToken(): string | null {
+    return window.localStorage.getItem(REFRESH_TOKEN_KEY)
+      ;
   }
 }
-
-
-
-// signOut(): void {
-//   window.sessionStorage.clear();
-// }
-
-// public saveToken(token: string): void {
-//   window.sessionStorage.removeItem(TOKEN_KEY);
-//   window.sessionStorage.setItem(TOKEN_KEY, token);
-// }
-
-// public getToken(): string | null {
-//   return window.sessionStorage.getItem(TOKEN_KEY);
-// }
-
-// public saveUser(user: any): void {
-//   window.sessionStorage.removeItem(USER_KEY);
-//   window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
-// }
-
-// public getUser(): any {
-//   const user = window.sessionStorage.getItem(USER_KEY);
-//   if (user) {
-//     return JSON.parse(user);
-//   }
-
-//   return {};
-// }

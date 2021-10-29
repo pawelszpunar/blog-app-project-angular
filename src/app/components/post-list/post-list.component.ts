@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, QueryList } from '@angular/core';
-import { PostTemplateComponent } from '../templates/post-template/post-template.component';
-import { ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-post-list',
@@ -10,20 +8,16 @@ import { ViewChild } from '@angular/core';
 })
 export class PostListComponent implements OnInit {
 
-  // @ViewChild('post') components!: QueryList<PostTemplateComponent>;
-  // uuid = posts.uuid;
-  // title = post.title;
-  // content = post.content;
-  // created = post.created;
-  // numberOfComments = post.numberOfComments;
+  page = 0;
+  size = 3; //number of posts on first page
+  base64image: any
 
   posts: any = [];  
 
-  constructor(http: HttpClient) {
-    http.get('http://localhost:8080/posts?size=3&page=0')
+  constructor(private authService: AuthService) {
+    this.authService.getAllPosts(this.page, this.size)
     .subscribe(response => {
       this.posts = response;
-      //console.log(response);
     })
   }
 

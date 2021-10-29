@@ -19,19 +19,6 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
 
 
-
-
-
-  // invalidLogin!: boolean;
-  // username!: string;
-  // password!: string;
-  // isLoggedIn = false;
-  // errorMessage = '';
-  // roles: string[] = [];
-  // loginInvalid!: boolean;
-  //returnUrl!: string;
-  //returnURL!: string;
-
   constructor(
     private router: Router, 
     private authService: AuthService,
@@ -60,18 +47,13 @@ export class LoginComponent implements OnInit {
     this.authService.login(params)
       .subscribe(
         (response) => {
-          this.tokenStorage.saveToken(response);
+          this.tokenStorage.saveTokens(response);
 
           let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
           this.router.navigate([returnUrl || '/']);
 
-
-
           // let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
           // this.router.navigate([returnUrl]);
-
-
-
           // this.returnUrl = this.route.queryParams.subscribe(retUrl => { this.returnUrl = retUrl.returnUrl; });
           // this.router.navigate([this.returnUrl]);
           // returnUrl = '..' + returnUrl;

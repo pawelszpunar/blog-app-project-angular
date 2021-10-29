@@ -12,19 +12,20 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { NoAccessComponent } from './components/no-access/no-access.component';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
-import { CommentsShowComponent } from './components/comments-show/comments-show.component';
-import { UploadImageComponent } from './components/upload-image/upload-image.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { PostEditComponent } from './components/post-edit/post-edit.component';
 
 const routes: Routes = [
   { path: 'post/:uuid', component: PostSingleComponent },
   { path: '', component: PostListComponent },
+  { path: 'blog', component: PostAllpostsComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminAuthGuard]},
   { path: 'admin/addpost', component: PostAddComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-  { path: 'blog', component: PostAllpostsComponent },
+  { path: 'admin/editpost/:uuid', component: PostEditComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+ 
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-
-  { path: 'upload', component: UploadImageComponent },
+  { path: 'profile', component: ProfileComponent },
 
   { path: 'about', component: AboutComponent },
   { path: 'no-access', component: NoAccessComponent },

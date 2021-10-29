@@ -3,8 +3,14 @@
     <mat-card-content class="post-list">        
         <p class="mat-display-1">{{ title }}</p>    
         <p style="white-space: pre-line;" class="mat-subheading-2">
-            
-            <img src="http://i.imgur.com/6bkt2Qk.gif" class="post-img"/>
+
+            <ng-container *ngIf="imagename">
+            <!-- <img [src]="imageSrc" style="height: 180px; width:180px" class="post-img" title="{{imagename}}"> -->
+            <img [src]="'data:' + imagetype + ';base64,' + image" style="height: 180px; width:180px" class="post-img" title="{{imagename}}">
+            </ng-container>
+            <ng-container *ngIf="!imagename">
+                <app-default-image></app-default-image>
+            </ng-container>
             
             {{ content }}</p>
     </mat-card-content>
@@ -19,7 +25,8 @@
                 mat-raised-button 
                 [routerLink]="['/post', uuid]" 
                 color="primary" 
-                fxLayoutAlign="center center">Read more</button>
+                fxLayoutAlign="center center"
+                [disabled]="disableReadMoreButton">Read more</button>
         </div>
     </div>
 

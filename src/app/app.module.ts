@@ -24,7 +24,6 @@ import { PostSingleComponent } from './components/post-single/post-single.compon
 import { PostAddComponent } from './components/post-add/post-add.component';
 import { PostAllpostsComponent } from './components/post-allposts/post-allposts.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { PostService } from './services/post.service';
 import { BackButtonDirective } from './back-button.directive';
 import { NavigationService } from './navigation.service';
 import { NotfoundComponent } from './components/notfound/notfound.component';
@@ -52,8 +51,14 @@ import { NoAccessComponent } from './components/no-access/no-access.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommentsTemplateComponent } from './templates/comments-template/comments-template.component';
 import { CommentsShowComponent } from './components/comments-show/comments-show.component';
-import { FileUploadService } from './services/file-upload.service';
-import { UploadImageComponent } from './components/upload-image/upload-image.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { JwtService } from './services/jwt.service';
+import { JwtModule } from '@auth0/angular-jwt';
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { PostEditComponent } from './components/post-edit/post-edit.component';
+import { CommentsAddComponent } from './components/comments-add/comments-add.component';
+import { DefaultImageComponent } from './templates/default-image/default-image.component';
+import { AddeditpostformComponent } from './templates/addeditpostform/addeditpostform.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +83,11 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     NoAccessComponent,
     CommentsTemplateComponent,
     CommentsShowComponent,
-    UploadImageComponent
+    ProfileComponent,
+    PostEditComponent,
+    CommentsAddComponent,
+    DefaultImageComponent,
+    AddeditpostformComponent
   ],
   exports: [
     MenuComponent
@@ -110,9 +119,11 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    JwtModule,
+    ReactiveFormsModule
   ],
-  providers: [PostService, NavigationService, AuthService, TokenStorageService, AuthGuard, AdminAuthGuard, FileUploadService],
+  providers: [NavigationService, AuthService, TokenStorageService, AuthGuard, AdminAuthGuard, JwtService, authInterceptorProviders],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

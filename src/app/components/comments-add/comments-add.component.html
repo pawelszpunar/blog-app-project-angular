@@ -1,0 +1,48 @@
+<ng-container *ngIf="toggle">
+<div class="mat-card-cvr">
+<mat-card class="my-box">
+    <!-- <mat-card-header fxLayoutAlign="center center">
+      <mat-card-title></mat-card-title>
+    </mat-card-header> -->
+      <form autocomplete="off" [formGroup]="addcommentForm" (submit)="addComment()" #addForm="ngForm" class="example-form">
+        <mat-card-content>
+               
+
+          <mat-form-field class="form-field">
+            <mat-label>Add comment
+            </mat-label>
+            <textarea matInput formControlName="content" id="content" class="form-control" required
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"></textarea>
+            <mat-error *ngIf="getControl.content.touched && getControl.content.invalid">
+              <span *ngIf="getControl.content.errors?.required">This field is mandatory.</span>
+              <span *ngIf="getControl.content.errors?.minlength">Minimum {{ minContent }} characters are required.</span>
+              <span *ngIf="getControl.content.errors?.maxlength">Maximum {{ maxContent }} characters are allowed.</span>
+            </mat-error>
+          </mat-form-field>
+ 
+              <button mat-raised-button color="primary" type="submit" [disabled]="!addForm.form.valid">Post</button>
+
+        
+        
+        </mat-card-content>
+      </form>
+    </mat-card>
+  </div>
+</ng-container>
+
+<ng-containe *ngIf="isloaded">
+  <div>
+      <mat-spinner></mat-spinner><h4>Submitting Form</h4>
+  </div>
+</ng-containe>
+
+<button type="button" (click)="switchToggle()">Przełącz</button>--
+
+<ng-container *ngIf="!toggle">
+  Thank you for your comment!
+</ng-container>
+
+{{ toggle }} {{ isloaded}}
+

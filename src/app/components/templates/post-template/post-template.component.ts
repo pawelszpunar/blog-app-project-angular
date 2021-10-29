@@ -13,6 +13,10 @@ export class PostTemplateComponent implements OnInit {
   @Input() author!: any;
   @Input() created!: any;
   @Input() numberOfComments!: any;
+  @Input() image: any;
+  @Input() imagename: any;
+  @Input() imagetype: any;
+  @Input() disableReadMoreButton!: boolean;
 
   constructor() { }
 

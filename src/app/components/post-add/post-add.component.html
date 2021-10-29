@@ -1,14 +1,14 @@
-<mat-card class="my-box">
+<ng-container *ngIf="!postadded">
+  <mat-card class="my-box">
     <mat-card-header fxLayoutAlign="center center">
       <mat-card-title>Add new post</mat-card-title>
     </mat-card-header>
-      <form autocomplete="off" [formGroup]="addpostForm" (submit)="addPost()" #addForm="ngForm">
-        <mat-card-content>
-  
-          <mat-form-field class="form-field">
-            <mat-label> Title
-            </mat-label>
-            <input matInput formControlName="title" id="title" class="form-control" required>
+    <form autocomplete="off" [formGroup]="addpostForm" (submit)="addPost()" #addForm="ngForm">
+      <mat-card-content>
+
+        <mat-form-field class="form-field">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" id="title" class="form-control" required>
             <mat-error *ngIf="getControl.title.touched && getControl.title.invalid">
               <span *ngIf="getControl.title.errors?.required">This field is mandatory.</span>
               <span *ngIf="getControl.title.errors?.minlength">Minimum {{ minTitle }} characters are required.</span>
@@ -17,8 +17,7 @@
           </mat-form-field>
   
           <mat-form-field class="form-field">
-            <mat-label> Content
-            </mat-label>
+            <mat-label>Content</mat-label>
             <textarea matInput formControlName="content" id="content" class="form-control" required
               cdkTextareaAutosize
               #autosize="cdkTextareaAutosize"
@@ -29,8 +28,31 @@
               <span *ngIf="getControl.content.errors?.maxlength">Maximum {{ maxContent }} characters are allowed.</span>
             </mat-error>
           </mat-form-field>
-  
         </mat-card-content>
+
+        <!-- image -->
+        <div class="form-group">
+          <div>
+          <label for="file">Choose file: </label>
+          <input 
+              formControlName="file"
+              id="file" 
+              type="file" 
+              class="form-control"
+              (change)="onFileChange($event)">
+          <div *ngIf="f.file.touched && f.file.invalid" class="alert alert-danger">
+              <div *ngIf="f.file.errors && f.file.errors.required">File is required.</div>
+            </div>
+          </div>
+          <div>
+            Rename file: 
+            <input matInput [(ngModel)]="newFileName" id="newName" formControlName="newName" class="rename-image" required>
+          <!-- <input [(ngModel)]="newFileName" id="newName" formControlName="newName"> -->
+          </div>
+      </div>
+      <!-- <img [src]="imageSrc" *ngIf="imageSrc" style="height: 180px; width:180px">
+      image -->
+      <br/>
         
         <button mat-raised-button color="primary" type="submit" [disabled]="!addForm.form.valid">Add post</button>
   
@@ -40,13 +62,22 @@
 <p style="text-align: center">Post preview:</p>
 
    <div fxLayout="column" fxLayoutGap="15px">
+
       <app-post-template
               [title]="getControl.title.value"
               [content]="getControl.content.value"
+              [image]="imagepreview"
+              [imagename]="newFileName"
+              [imagetype]="type"
+              [disableReadMoreButton]="true"
               >
       </app-post-template>
       </div>
-  
+    </ng-container>
+    <ng-container *ngIf="postadded">>
+      <p class="mat-display-1" layout-align="center center" style="text-align: center;">Your post has been added!:</p>
+      Post added
+    </ng-container>
 
       <!-- [created]=""
       [author]=""

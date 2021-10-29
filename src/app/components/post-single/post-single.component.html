@@ -6,7 +6,10 @@
     <mat-card class="singlepost">
         <mat-card-content>
             <p class="mat-title">{{ posts.title }}</p>
-            <p style="white-space: pre-line;">{{ posts.content }}</p></mat-card-content>
+            <p style="white-space: pre-line;">
+                <img [src]="'data:' + posts.imagetype + ';base64,' + posts.image" style="height: 180px; width:180px" class="post-img">
+                
+                {{ posts.content }}</p></mat-card-content>
         <p class="post-meta">Posted by
             <a href="#!">{{ posts.author }}</a>
             on {{ posts.created }}</p>
@@ -14,11 +17,39 @@
       <mat-divider></mat-divider>    
 </div>
 
+<button mat-raised-button [routerLink]="['/admin/editpost', uuid]" 
+    *ngIf="authService.isLoggedIn() && authService.loggedInWithRole('ROLE_ADMIN')" color="primary">
+    Edit post
+</button>
+
+
+
 <div>
 
     <mat-card><p class="mat-title">Comments ({{ posts.numberOfComments }}): </p></mat-card>
+
+    <ng-container *ngIf="authService.isLoggedIn()">
+        <div>
+            <app-comments-add
+                [username]="username"
+                [post_uuid]="uuid"
+                (commentAdded)=onCommentAdded()
+            >
+            </app-comments-add>
+        </div>
+    </ng-container>
+
     <ng-container *ngIf="posts.numberOfComments == 0">
-        <mat-card>There's currently no comments for this post.</mat-card></ng-container>
+        <mat-card>There's currently no comments for this post.</mat-card>
+    </ng-container>
+
+    <ng-container *ngIf="!authService.isLoggedIn()">
+        <mat-card>
+            You must be logged in to add comments.
+        </mat-card>
+    </ng-container>
+
+    
     <app-comments-template
     *ngFor="let comments of comments.content"
     [content]="comments.content"

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-comments-show',
@@ -25,7 +26,7 @@ export class CommentsShowComponent implements OnInit {
   //uuid: string = "a175c0e4-5ba2-4461-aa65-76a289542e86";
   comments: any = [];
 
-  constructor(private http: HttpClient) {  }
+  constructor(private http: HttpClient, public authService: AuthService) {  }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -38,7 +39,7 @@ export class CommentsShowComponent implements OnInit {
 
   showComments(_uuid: string) {
     console.log('TEST: ' + this._uuid);
-    this.http.get('http://localhost:8080/comments/for-post/' + _uuid)
+    this.authService.showComments(_uuid)
   .subscribe(response => {
     this.comments = response;
     console.log(response);

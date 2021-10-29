@@ -1,0 +1,31 @@
+<div class="container" *ngIf="username; else loggedOut">
+
+<div class="basic">
+
+      <mat-card-content class="post-list">        
+          <p class="mat-display-1">Profile</p>    
+          <p style="white-space: pre-line;">
+            Username: <b>{{ username }}</b></p>
+            <p style="white-space: pre-line;">
+              Email: ...</p>
+              <p style="white-space: pre-line;">
+                Roles: </p><ul>
+                  <li *ngFor="let role of roles">
+                    <b>{{ role }}</b>
+                  </li>
+                </ul>
+      </mat-card-content>
+
+  
+  
+
+  
+  </div>
+
+
+</div>
+  
+  <ng-template #loggedOut>
+    Please login.
+  </ng-template>
+  
